@@ -1,0 +1,265 @@
+Direção de frontend — Prazo Certo
+
+Status: o backend está no bloco do app.py; esta direção destrava o frontend em paralelo. 
+
+Leitura de design: agenda acadêmica para estudantes do técnico, linguagem de planejador escolar — azul claro, cartões brancos arredondados, ondas e sidebar navy. A identidade é a dos mockups do parceiro; esta direção não troca a estética, só fixa tokens, estrutura e contrato de integração.
+Justificativa da paleta: azul claro + navy + cartões brancos porque o produto é uma agenda escolar: o azul remete a caderno/planejador, o navy separa navegação de conteúdo e as ondas quebram a rigidez da lista de prazos sem virar decoração aleatória.
+
+Um único :root em css/estilo.css. Se o mockup tiver hex exato, substitua só os valores; os nomes ficam.
+Token	Valor inicial	Uso
+--azul-noite	#102A43	sidebar, títulos, texto forte
+--azul-noite-2	#0B1F33	hover da sidebar
+--azul-acao	#1D5FD1	botões primários e links (contraste AA com branco)
+--azul-acao-hover	#174BA8	hover
+--azul-300	#7FB6F0	detalhes e ícones sobre navy
+--azul-100	#DCEBFA	fundos de destaque, ondas
+--fundo	#F4F9FE	fundo das páginas
+--superficie	#FFFFFF	cards e formulários
+--borda	#D6E4F0	bordas
+--texto	#1B2A41	texto principal
+--texto-suave	#52627A	texto secundário
+--ambar-fundo	#FEF3C7	badge pendente
+--ambar-texto	#92400E	badge pendente
+--verde-fundo	#DCFCE7	badge concluída
+--verde-texto	#166534	badge concluída
+--vermelho	#B42318	erros e excluir
+--vermelho-hover	#912018	hover
+--foco	#1D5FD1	outline no claro
+--foco-claro	#8CC8FF	outline sobre navy
+Tipografia: se o mockup já fixou a fonte, ela é a fonte do projeto; não troque por outra. Se ainda não houver, use Nunito nos títulos e Nunito Sans no texto, com fallback "Segoe UI", system-ui, sans-serif. Justificativa: terminais arredondados e abertura larga combinam com o desenho de calendário/relógio e com o tom de planejador escolar; é uma escolha do tema, não o Inter genérico. Fonte própria em .woff2, font-display: swap, sem link do Google Fonts (a demo precisa funcionar offline). Se não houver arquivo de fonte, use a stack do sistema e registre no README.
+Escala: base 16px, linha 1.6; h1 com clamp(2rem, 1.4rem + 3vw, 3.25rem); h2 com clamp(1.5rem, 1.2rem + 1.5vw, 2rem); h3 1.125rem; apoio 0.875rem. Peso 400, 600, 700 e 800.
+Espaçamento: 4, 8, 12, 16, 24, 32, 48, 64, 96px. Seção 64px no mobile e 96px no desktop; card 24px; formulário 32px.
+Raio: botões e inputs 10px; cards 16px; diálogos 24px; badges e pills 999px. Uma regra só, aplicada em todo lugar.
+Sombra: 0 8px 24px rgba(16, 42, 67, 0.08) e uma variante mais forte para o diálogo. Sombra com tom do fundo (navy), não preto puro.
+Movimento: só background-color, border-color, color e transform em 150ms. :active com translateY(1px). Sem fade-in ao rolar, sem parallax, sem animação ambiente. A agenda é ferramenta: o usuário quer ler datas. Respeite prefers-reduced-motion: reduce.
+Tema: somente claro nesta entrega. O mockup é claro, o prazo é curto e dark mode dobraria a superfície de teste sem ajudar a defesa. Não inclua botão de tema.
+3. Landing (index.html)
+Header (64–72px): marca à esquerda (símbolo SVG + texto “Prazo Certo”), link “Funcionalidades” e CTA “Entrar” à direita. Abaixo de 768px, esconda o link e mantenha marca + “Entrar”.
+Hero em duas colunas (≥900px): texto à esquerda, mini-agenda à direita. A coluna direita não é decoração: é uma prévia real do produto em HTML, com o rótulo “Exemplo de agenda” e três linhas:
+- Prova de Matemática — 18/11 — Pendente
+- Trabalho de História — 21/11 — Pendente
+- Prova de Português — 25/11 — Concluída
+Atrás da mini-agenda, o SVG de calendário/relógio e uma onda. A mini-agenda é HTML, não screenshot; isso mostra o produto e continua legível em qualquer tela.
+Copy do hero:
+- H1: “Todas as provas e trabalhos em uma lista só.”
+- Sub: “Cadastre disciplinas, anote prazos e marque o que já entregou. Sem planilha, sem post-it perdido.”
+- Primário: “Criar conta” → pages/cadastro.html.
+- Secundário: “Entrar” → pages/login.html.
+Features: são quatro cards porque o mockup tem quatro. Cada card leva um exemplo concreto, não só ícone + frase:
+Card	Texto	Detalhe visual
+Disciplinas no lugar	“Matemática, História, Português: cada trabalho fica na disciplina certa.”	três chips com nomes
+Prazo na frente	“A data da prova aparece antes de virar correria.”	chip de data “18/11”
+Filtro rápido	“Veja só as provas pendentes ou só o que é de uma disciplina.”	dois chips de filtro
+Status claro	“Marcou como concluída, saiu da lista de pendências.”	badge “Concluída”
+Ícones em SVG de linha, 24px, sem emoji. Não acrescente depoimentos, logo wall, pricing ou FAQ: não estão no mockup e não são avaliados.
+Footer: “Prazo Certo · Projeto Integrador · UNASP 2026”. Sem link morto.
+O que não implementar: os três pontinhos de janela do mockup são moldura do print, não interface. Não recrie barra de navegador falsa.
+4. Login (pages/login.html)
+Composição: duas colunas a partir de 1024px.
+- Esquerda (painel de marca): fundo --azul-noite, grade de pontos sutil, marca em branco, título “Seu semestre, em ordem.”, sub “Provas, trabalhos e prazos em uma agenda só sua.” e três marcos ligados por uma linha tracejada: “Prova de Física — 18/11”, “Trabalho de História — 21/11”, “Prova de Português — 25/11”. Isso é o mapa de pontos da referência traduzido para uma linha do tempo de prazos.
+- Direita (formulário): cartão branco de até 420px, 32px de padding, raio 24px, sombra suave, centralizado verticalmente. Título “Entrar”, sub “Acesse sua agenda de provas e trabalhos.”
+Campos: e-mail (type="email", autocomplete="username", required) e senha (type="password", autocomplete="current-password", required, minlength="8"). Label acima do input, sempre visível; placeholder não substitui label. Área de erro #erro-login com role="alert" e tabindex="-1", oculta por hidden.
+Ações: botão “Entrar” largura total; divisor “ou”; link “Criar uma conta” → cadastro.html; link “Voltar para o início” → ../index.html.
+Abaixo de 1024px: o painel de marca vira uma faixa compacta (marca + uma linha), o cartão centraliza. Abaixo de 480px: sem sombra, padding 20px, largura total.
+5. Cadastro (pages/cadastro.html)
+Mesma composição do login. Campos: nome (autocomplete="name", maxlength="100"), e-mail, senha (minlength="8"), confirmar senha. O campo “confirmar senha” é validação só do frontend; o backend recebe apenas nome, email e senha. Área #erro-cadastro, botão “Criar conta”, link “Já tenho conta” → login.html.
+6. Dashboard (pages/dashboard.html)
+Desktop (≥1024px): sidebar navy fixa de 240px com marca, navegação (“Atividades”, “Disciplinas”), bloco do usuário no rodapé e botão “Sair”. Conteúdo à direita, com largura máxima de 1120px.
+Abaixo de 1024px: a sidebar vira uma barra superior: marca + usuário + “Sair” na primeira linha; “Atividades” e “Disciplinas” como pills na segunda. Sem drawer e sem hambúrguer — não vale o JS extra.
+Cabeçalho da página: “Minhas atividades”, sub “Provas e trabalhos com prazo e status.”, botão “Nova atividade” (type="button", porque abre diálogo, não navega). Contador opcional ao lado do título.
+Filtros: três selects com label acima — disciplina, tipo, status — e botão “Limpar filtros”. Não coloque os filtros dentro de <form>; use uma <section> com aria-label="Filtros" e ouça change. Opções:
+- Disciplina: “Todas as disciplinas” (value=""), depois preenchido pelo seu JS.
+- Tipo: “Todos os tipos”, “Prova” (prova), “Trabalho” (trabalho).
+- Status: “Todos os status”, “Pendente” (pendente), “Concluída” (concluida).
+Lista: <ul> de cards, não <table>. Cada atividade é um <li> com grid: título e disciplina à esquerda; tipo, prazo, status e ações à direita. No desktop, um cabeçalho visual de colunas (aria-hidden="true") ajuda a alinhar. Abaixo de 768px, o card empilha e mostra rótulos “Disciplina”, “Tipo”, “Prazo” e “Status”.
+Por que não tabela: cada item tem ações e quebra em cartão no mobile; uma tabela com display:block perde semântica em leitor de tela. A lista continua sendo uma lista de registros, e o Grid alinha as colunas. Essa é a resposta para a defesa.
+Card da atividade:
+- Título em h3 (o mockup não mostra o título; ele é obrigatório).
+- Disciplina em linha secundária.
+- Badge de tipo neutro (prova/trabalho) — sem cor forte.
+- Prazo em <time datetime="YYYY-MM-DD">, formatado pelo seu JS como dd/mm.
+- Badge de status colorido: âmbar para pendente, verde para concluída, sempre com texto.
+- Ações: concluir (check), editar (lápis), excluir (lixeira). Botões de 44×44, aria-label específico, SVG inline com aria-hidden="true".
+- Concluída: título riscado e esmaecido; o botão “concluir” some via CSS [data-status="concluida"].
+Diálogo “Nova atividade” com <dialog> nativo:
+- Título “Nova atividade” (vira “Editar atividade” no modo edição).
+- Campos: título (maxlength="150"), disciplina (select preenchido pelo JS), tipo (select prova/trabalho), data (type="date", valor YYYY-MM-DD), descrição (textarea).
+- Aviso #aviso-sem-disciplinas, oculto: “Você precisa cadastrar uma disciplina antes de criar uma atividade.” com link para disciplinas.html.
+- Erro #erro-atividade no topo do formulário.
+- Rodapé: “Cancelar” (type="button") e “Salvar” (type="submit"). Não use method="dialog"; o envio precisa passar pelo seu fetch.
+Diálogo de exclusão: “Excluir atividade?”, o título da atividade em destaque, “Essa ação não pode ser desfeita.”, botões “Cancelar” e “Excluir”. Substitui confirm().
+Estados: carregando (3 linhas de esqueleto), vazio, sem resultado e erro, todos no HTML e ocultos por hidden — detalhes na seção 8.
+Disciplinas (pages/disciplinas.html): mesma casca. Formulário no topo com nome e professor (opcional) e botão “Adicionar disciplina”; lista abaixo com nome, professor e botão excluir. O diálogo de exclusão avisa: “As atividades dessa disciplina também serão excluídas.” Isso é verdade por causa do ON DELETE CASCADE e precisa aparecer na interface. Editar disciplina fica fora da primeira versão; o botão só entra se você for ligar.
+7. Contrato de integração
+Esta é a parte que evita retrabalho. O parceiro precisa entregar exatamente estes ganchos.
+Login
+Elemento	id	name
+formulário	form-login	—
+e-mail	email	email
+senha	senha	senha
+erro	erro-login	—
+botão entrar	btn-entrar	—
+link cadastro	link-cadastro	—
+link voltar	link-voltar	—
+Cadastro
+Elemento	id	name
+formulário	form-cadastro	—
+nome	nome	nome
+e-mail	email	email
+senha	senha	senha
+confirmar senha	confirmar-senha	confirmar_senha
+erro	erro-cadastro	—
+botão criar	btn-cadastrar	—
+link login	link-login	—
+Dashboard
+Elemento	id	Regra
+nome do usuário	usuario-nome	texto neutro “Carregando…”
+e-mail do usuário	usuario-email	texto neutro
+sair	btn-sair	<button type="button">
+nova atividade	btn-nova-atividade	<button type="button">
+contador	contador-atividades	opcional
+filtro disciplina	filtro-disciplina	<select> com opção vazia
+filtro tipo	filtro-tipo	opções estáticas
+filtro status	filtro-status	opções estáticas
+limpar filtros	btn-limpar-filtros	<button type="button">
+lista	lista-atividades	<ul> vazio no HTML final
+template	template-atividade	<template>
+carregando	estado-carregando	visível por padrão
+vazio	estado-vazio	hidden
+sem resultado	estado-sem-resultado	hidden
+erro	estado-erro	hidden, role="alert"
+nova atividade (vazio)	btn-nova-atividade-vazio	hidden junto do estado
+tentar novamente	btn-tentar-novamente	—
+diálogo atividade	dialog-atividade	<dialog>
+formulário atividade	form-atividade	—
+título do diálogo	dialog-titulo	texto
+id oculto	atividade-id	<input type="hidden">
+título	atividade-titulo	name="titulo"
+disciplina	atividade-disciplina	name="id_disciplina"
+tipo	atividade-tipo	name="tipo"
+data	atividade-data	name="data_prazo"
+descrição	atividade-descricao	name="descricao"
+erro	erro-atividade	hidden, role="alert"
+aviso sem disciplinas	aviso-sem-disciplinas	hidden
+cancelar atividade	btn-cancelar-atividade	type="button"
+diálogo excluir	dialog-excluir	<dialog>
+título a excluir	excluir-titulo	texto
+cancelar exclusão	btn-cancelar-excluir	type="button"
+confirmar exclusão	btn-confirmar-excluir	type="button"
+toast	toast	role="status", aria-live="polite"
+Disciplinas
+Elemento	id	name
+formulário	form-disciplina	—
+nome	disciplina-nome	nome
+professor	disciplina-professor	professor
+erro	erro-disciplina	—
+lista	lista-disciplinas	—
+template	template-disciplina	—
+vazio	estado-vazio-disciplinas	—
+carregando	estado-carregando-disciplinas	—
+erro	estado-erro-disciplinas	—
+diálogo excluir	dialog-excluir-disciplina	—
+nome a excluir	excluir-disciplina-nome	—
+confirmar exclusão	btn-confirmar-excluir-disciplina	—
+Template da atividade
+O <template id="template-atividade"> contém um <li> com esta estrutura de contrato — o parceiro escreve a versão visual final:
+Elemento	Atributo obrigatório
+item	class="atividade", data-id="", data-status="pendente", data-tipo="prova"
+título	h3 com data-campo="titulo"
+disciplina	p com data-campo="disciplina"
+tipo	.badge-tipo com data-campo="tipo"
+prazo	time com data-campo="data_prazo"
+status	.badge-status com data-campo="status"
+concluir	button com data-action="concluir"
+editar	button com data-action="editar"
+excluir	button com data-action="excluir"
+Regras do template: nenhum id dentro dele (vai duplicar ao clonar); apenas classes e data-*; os ícones são SVG inline; o botão “concluir” fica visível por padrão e o CSS o esconde quando o item tem data-status="concluida".
+Template da disciplina: <li class="disciplina" data-id=""> com h3[data-campo="nome"], p[data-campo="professor"] e button[data-action="excluir-disciplina"]. Se o professor estiver vazio, o <p> fica vazio e o CSS esconde com :empty.
+Campos e FormData: os name acima são os mesmos nomes que o JSON do backend usa (titulo, id_disciplina, tipo, data_prazo, descricao, nome, professor). Você consegue montar o corpo com Object.fromEntries(new FormData(form)) sem inventar mapeamento. Converta id_disciplina para número antes de enviar.
+8. Estados
+O parceiro entrega todos no HTML, ocultos por hidden; você alterna. Sem estado, a tela quebra quando a API demora ou falha.
+Estado	Onde	Texto
+Carregando	dashboard e disciplinas	esqueleto de 3 linhas + “Carregando atividades…” para leitor de tela
+Vazio	dashboard	“Nenhuma atividade cadastrada. Comece pela primeira prova ou trabalho.” + botão “Nova atividade”
+Sem resultado	dashboard	“Nenhuma atividade com esses filtros. Ajuste ou limpe os filtros.”
+Erro	dashboard	“Não foi possível carregar suas atividades.” + “Tentar novamente”
+Vazio	disciplinas	“Nenhuma disciplina cadastrada. Use o formulário acima para cadastrar a primeira.”
+Erro	disciplinas	“Não foi possível carregar suas disciplinas.” + “Tentar novamente”
+Erro de login	login	“E-mail ou senha incorretos.”
+Erro de cadastro	cadastro	mensagem do backend, ex.: “Este e-mail já está cadastrado.”
+Senhas diferentes	cadastro	“As senhas não conferem.”
+Sucesso	toast	“Atividade salva.”, “Atividade concluída.”, “Atividade excluída.”, “Disciplina cadastrada.”
+O carregando do dashboard fica visível por padrão; o vazio, o sem resultado e o erro começam com hidden. Inclua <noscript> nas páginas que dependem de JS: “Ative o JavaScript para usar a agenda.”
+9. Responsivo
+Largura	Landing	Login/cadastro	Dashboard
+360px	header só marca + Entrar; hero empilhado; botões full width; features 1 coluna	faixa de marca + cartão sem sombra, padding 16px	barra superior; filtros 1 coluna; cards empilhados; diálogo quase full width
+768px	features 2 colunas; hero ainda empilhado	cartão centralizado	filtros em 3 colunas; cards ainda empilhados
+1024px	hero 2 colunas; features 4 colunas	split 2 colunas	sidebar fixa de 240px
+1200px	conteúdo max 1120px	split 50/50	conteúdo max 1120px
+Regras: mobile-first; box-sizing: border-box global; min-height: 100dvh no split do login (não 100vh); sem scroll horizontal em 360px; títulos longos com overflow-wrap: anywhere; alvos de toque de 44px; imagens com width/height para não pular layout.
+10. Acessibilidade
+- lang="pt-BR" em todas as páginas; título específico por página.
+- Header, nav, main, footer e aside com aria-label; link “Pular para o conteúdo” no dashboard.
+- Todo input com label for + id; erro com role="alert" e tabindex="-1"; aria-invalid="true" é seu JS que coloca.
+- Foco visível: outline: 3px solid var(--foco); outline-offset: 2px; sobre navy, --foco-claro.
+- Ícones decorativos com aria-hidden="true" e focusable="false"; botões só de ícone com aria-label.
+- Status nunca só por cor: badge sempre com texto “Pendente”/“Concluída”.
+- <dialog> com aria-labelledby apontando para o título; Esc fecha nativo; ::backdrop com navy translúcido.
+- Contraste AA em texto, labels, placeholders, botões e badges. Teste com o olho e com ferramenta.
+- Zoom de 200% sem perda de conteúdo; prefers-reduced-motion desliga transições.
+- Não use placeholder como label, não use div clicável no lugar de button, não use alert()/confirm().
+11. Assets
+Arquivo	Conteúdo	Regra
+img/logo.svg	símbolo calendário + relógio, versão navy	sem texto dentro do SVG; o nome “Prazo Certo” é HTML
+img/logo-branco.svg	mesma marca em branco	para a sidebar/painel navy
+img/favicon.svg	marca 32×32	—
+img/hero-calendario.svg	ilustração decorativa 480×360	sem texto; alt=""
+img/onda.svg	uma onda, viewBox="0 0 1440 120"	preserveAspectRatio="none", alt=""; reutilize no topo e no rodapé
+img/vazio.svg	calendário pequeno para o estado vazio	opcional
+fonts/*.woff2	400, 600, 700, 800	só se houver fonte própria; nada de CDN
+Tudo vetorial, otimizado, sem PNG/JPG, sem screenshot do mockup. A mini-agenda do hero é HTML, não imagem.
+12. O que o parceiro não pode fazer
+- Não incluir <script>, onclick, fetch, localStorage ou URL de API.
+- Não deixar atividades ou usuário mockados no HTML final. Use <template> e estados ocultos; para revisar o visual, remova hidden/use open temporariamente e devolva o estado final.
+- Não colocar id dentro de <template>.
+- Não usar CDN para fonte, ícone, CSS ou JS.
+- Não usar alert()/confirm(); os diálogos estão no HTML.
+- Não usar placeholder como label, nem div/span clicável no lugar de button.
+- Não linkar backend/, database/ ou docs/; não copiar o .db.
+- Não usar emoji como ícone; SVG de linha.
+- Não recriar os três pontinhos de navegador do mockup.
+- Não inventar dark mode, carrossel, parallax ou animação de entrada.
+13. Critérios de aceite da entrega do parceiro
+- As 5 páginas abrem por file:// e navegam entre si sem link quebrado.
+- Nenhuma requisição externa no console; nenhum 404 de CSS, SVG ou fonte.
+- HTML semântico: landmarks, headings em ordem, labels ligados, botões com type.
+- Todos os id da seção 7 existem exatamente uma vez na página certa.
+- Todos os name dos formulários batem com a tabela.
+- Templates sem id; classes e data-* conforme o contrato.
+- Estados de carregando, vazio, sem resultado e erro presentes e ocultos.
+- Diálogos fechados no HTML final (sem open).
+- 360px, 768px e 1200px sem scroll horizontal; 200% de zoom legível.
+- Teclado percorre tudo; foco visível; Esc fecha diálogo.
+- Contraste AA conferido; status com texto, não só cor.
+- Nenhum JS, nenhum dado mockado, nenhum link para backend.
+- README curto do parceiro: arquivos, fonte, tokens alterados, pendências.
+14. O que você faz depois da entrega estática
+Nesta ordem, sem pular:
+1. Revisão: abra as páginas, confira a seção 13 item por item e peça ao parceiro um walkthrough de 20 minutos. Você vai defender esse HTML também; não aceite código que não entende.
+2. js/api.js: um objeto API com get, post, put, patch, delete; fetch com credentials: "same-origin", Content-Type: application/json, tratamento de 204, erro com status e mensagem. Sem módulos ES; scripts com defer na ordem.
+3. js/auth.js: submit de login/cadastro, validação local, redirecionamento para dashboard.html; no dashboard, GET /api/me para preencher #usuario-nome/#usuario-email e #btn-sair para POST /api/logout.
+4. js/atividades.js: carregar disciplinas e atividades, preencher o select, renderizar o template, filtros por change, abrir/fechar diálogo, criar/editar, concluir, excluir, estados e toast. Use delegação de evento em #lista-atividades (closest("[data-action]")) em vez de um listener por botão.
+5. js/disciplinas.js: listar, criar, excluir, estados.
+6. Backend: repetir no app.py todas as validações que o HTML faz. required e minlength são UX, não segurança.
+Você precisa saber explicar, no mínimo:
+- Por que caminhos relativos e como o Flask serve o frontend sem expor backend/.
+- Por que a lista é <ul> e não <table>.
+- O que <template> faz e por que não há id dentro dele.
+- Como funciona a delegação de evento na lista.
+- Por que o HTML do parceiro não tem JS (separação de responsabilidades).
+- Por que esconder a página do dashboard não é autenticação; onde está a checagem real.
+- A diferença entre validação HTML e validação no backend.
+- Por que <dialog> em vez de uma div modal.
+15. Prazo e corte
+Hoje é 12/11. O parceiro precisa entregar o estático até 13/11, 18h; você liga o JS em 13–14/11 e fecha a integração em 15/11. O app.py corre em paralelo e não depende do frontend.
+Se o parceiro atrasar: você escreve uma versão mínima de login e dashboard (precisa entender cada linha), corta a ilustração do hero e o polimento da página de disciplinas. Não corte o dashboard, o login, a revisão nem a defesa. Se ele só entregar Figma, este documento vira o seu roteiro de implementação.
