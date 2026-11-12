@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar — Prazo Certo</title>
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <main class="auth-layout" aria-label="Acesso à conta">
+    <aside class="auth-brand-panel" aria-label="Apresentação da marca">
+      <div class="auth-brand-content">
+        <a class="brand brand--light" href="../index.html" aria-label="Prazo Certo — início">
+          <img src="../img/logo-branco.svg" width="36" height="36" alt="">
+          <span>Prazo Certo</span>
+        </a>
+        <h1>Seu semestre, em ordem.</h1>
+        <p>Provas, trabalhos e prazos em uma agenda só sua.</p>
+        <ol class="auth-timeline" aria-label="Exemplo de próximos prazos">
+          <li>Prova de Física<time datetime="2026-11-18">18/11</time></li>
+          <li>Trabalho de História<time datetime="2026-11-21">21/11</time></li>
+          <li>Prova de Português<time datetime="2026-11-25">25/11</time></li>
+        </ol>
+      </div>
+    </aside>
+
+    <section class="auth-main" aria-label="Acesso à conta">
+      <div class="auth-card">
+        <h2>Entrar</h2>
+        <p>Acesse sua agenda de provas e trabalhos.</p>
+
+        <form id="form-login" class="form-stack" action="#" method="post">
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="senha">Senha</label>
+            <input id="senha" name="senha" type="password" autocomplete="current-password" minlength="8" required>
+          </div>
+          <div id="erro-login" class="form-error" role="alert" tabindex="-1" hidden>E-mail ou senha incorretos.</div>
+          <button id="btn-entrar" class="auth-submit" type="submit">Entrar</button>
+        </form>
+
+        <div class="auth-divider" aria-hidden="true">ou</div>
+        <nav class="auth-links" aria-label="Links da conta">
+          <a id="link-cadastro" href="cadastro.html">Criar uma conta</a>
+          <a id="link-voltar" href="../index.html">Voltar para o início</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+  <noscript>Ative o JavaScript para usar a agenda.</noscript>
+</body>
+</html>

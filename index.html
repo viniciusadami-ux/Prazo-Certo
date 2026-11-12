@@ -1,11 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prazo Certo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Organize provas, trabalhos e prazos escolares em uma agenda simples.">
+  <title>Prazo Certo — sua agenda escolar</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    
+  <header class="site-header" aria-label="Cabeçalho principal">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Prazo Certo — início">
+        <img src="img/logo.svg" width="38" height="38" alt="">
+        <span>Prazo Certo</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a class="features-link" href="#funcionalidades">Funcionalidades</a>
+        <a class="button" href="pages/login.html">Entrar</a>
+      </nav>
+    </div>
+  </header>
+  <img class="hero-wave hero-wave--top" src="img/onda.svg" width="1440" height="120" alt="">
+
+  <main aria-label="Conteúdo principal">
+    <section class="hero" aria-label="Apresentação do Prazo Certo">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Sua rotina escolar mais leve</p>
+          <h1>Todas as provas e trabalhos em uma lista só.</h1>
+          <p>Cadastre disciplinas, anote prazos e marque o que já entregou. Sem planilha, sem post-it perdido.</p>
+          <div class="hero-actions">
+            <a class="button" href="pages/cadastro.html">Criar conta</a>
+            <a class="button button--secondary" href="pages/login.html">Entrar</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img class="hero-art" src="img/hero-calendario.svg" width="480" height="360" alt="">
+          <div class="hero-preview" aria-label="Exemplo de agenda">
+          <div class="preview-top">
+            <strong>Exemplo de agenda</strong>
+            <span class="preview-date">Novembro</span>
+          </div>
+          <ul class="preview-list">
+            <li class="preview-item">
+              <div>
+                <strong>Prova de Matemática</strong>
+                <time datetime="2026-11-18">18/11</time>
+              </div>
+              <span class="badge badge--pending">Pendente</span>
+            </li>
+            <li class="preview-item">
+              <div>
+                <strong>Trabalho de História</strong>
+                <time datetime="2026-11-21">21/11</time>
+              </div>
+              <span class="badge badge--pending">Pendente</span>
+            </li>
+            <li class="preview-item">
+              <div>
+                <strong>Prova de Português</strong>
+                <time datetime="2026-11-25">25/11</time>
+              </div>
+              <span class="badge badge--done">Concluída</span>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <img class="hero-wave" src="img/onda.svg" width="1440" height="120" alt="">
+    </section>
+
+    <section class="features" id="funcionalidades" aria-label="Funcionalidades do Prazo Certo">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Tudo no seu lugar</p>
+          <h2>Organização sem complicação</h2>
+          <p>Encontre suas atividades e acompanhe cada prazo em poucos passos.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 5.5V21M8 7h8M8 11h7"/></svg>
+            </div>
+            <h3>Disciplinas no lugar</h3>
+            <p>Matemática, História, Português: cada trabalho fica na disciplina certa.</p>
+            <div class="feature-example" aria-label="Exemplos de disciplinas">
+              <span class="chip">Matemática</span><span class="chip">História</span><span class="chip">Português</span>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="m8 15 2 2 5-5"/></svg>
+            </div>
+            <h3>Prazo na frente</h3>
+            <p>A data da prova aparece antes de virar correria.</p>
+            <div class="feature-example"><span class="chip">18/11</span><span class="muted">Próximo prazo</span></div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="9" cy="5" r="2.2" fill="#fff"/><circle cx="15" cy="12" r="2.2" fill="#fff"/><circle cx="7" cy="19" r="2.2" fill="#fff"/></svg>
+            </div>
+            <h3>Filtro rápido</h3>
+            <p>Veja só as provas pendentes ou só o que é de uma disciplina.</p>
+            <div class="feature-example"><span class="chip">Pendente</span><span class="chip">Matemática</span></div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+            </div>
+            <h3>Status claro</h3>
+            <p>Marcou como concluída, saiu da lista de pendências.</p>
+            <div class="feature-example"><span class="badge badge--done">Concluída</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Rodapé">
+    <img class="footer-wave" src="img/onda.svg" width="1440" height="120" alt="">
+    <div class="container"><p>Prazo Certo · Projeto Integrador · UNASP 2026</p></div>
+  </footer>
 </body>
 </html>

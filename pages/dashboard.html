@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minhas atividades — Prazo Certo</title>
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Barra lateral">
+      <div class="sidebar-topline">
+        <a class="brand brand--light" href="../index.html" aria-label="Prazo Certo — início">
+          <img src="../img/logo-branco.svg" width="38" height="38" alt="">
+          <span>Prazo Certo</span>
+        </a>
+        <div class="sidebar-user">
+          <strong id="usuario-nome">Carregando…</strong>
+          <span id="usuario-email">Sua conta</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navegação do sistema">
+        <a href="dashboard.html" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18M8 13h3M8 17h7"/></svg>
+          Atividades
+        </a>
+        <a href="disciplinas.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 5.5V21M8 7h8M8 11h7"/></svg>
+          Disciplinas
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button id="btn-sair" type="button" class="button button--outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+          Sair
+        </button>
+      </div>
+    </aside>
+
+    <main id="conteudo-principal" class="app-content" aria-label="Conteúdo principal">
+      <header class="page-heading">
+        <div>
+          <div class="heading-title-row">
+            <h1>Minhas atividades</h1>
+            <span id="contador-atividades" class="count-pill" hidden></span>
+          </div>
+          <p>Provas e trabalhos com prazo e status.</p>
+        </div>
+        <button id="btn-nova-atividade" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+          Nova atividade
+        </button>
+      </header>
+
+      <section class="panel" aria-label="Área de atividades">
+        <section class="filters" aria-label="Filtros">
+          <div class="field">
+            <label for="filtro-disciplina">Disciplina</label>
+            <select id="filtro-disciplina" name="filtro_disciplina">
+              <option value="">Todas as disciplinas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filtro-tipo">Tipo</label>
+            <select id="filtro-tipo" name="filtro_tipo">
+              <option value="">Todos os tipos</option>
+              <option value="prova">Prova</option>
+              <option value="trabalho">Trabalho</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filtro-status">Status</label>
+            <select id="filtro-status" name="filtro_status">
+              <option value="">Todos os status</option>
+              <option value="pendente">Pendente</option>
+              <option value="concluida">Concluída</option>
+            </select>
+          </div>
+          <button id="btn-limpar-filtros" class="button button--secondary" type="button">Limpar filtros</button>
+        </section>
+
+        <div class="list-heading" aria-hidden="true">
+          <span>Atividade</span><span>Detalhes</span><span>Ações</span>
+        </div>
+        <ul id="lista-atividades" class="activity-list" aria-label="Lista de atividades"></ul>
+
+        <section id="estado-carregando" class="skeleton-list" aria-label="Carregando atividades">
+          <p class="sr-only" role="status">Carregando atividades…</p>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+        </section>
+
+        <section id="estado-vazio" class="state-box" hidden>
+          <h2>Nenhuma atividade cadastrada.</h2>
+          <p>Comece pela primeira prova ou trabalho.</p>
+          <button id="btn-nova-atividade-vazio" type="button">Nova atividade</button>
+        </section>
+
+        <section id="estado-sem-resultado" class="state-box" hidden>
+          <h2>Nenhum resultado encontrado.</h2>
+          <p>Nenhuma atividade com esses filtros. Ajuste ou limpe os filtros.</p>
+        </section>
+
+        <section id="estado-erro" class="state-box state-box--error" role="alert" hidden>
+          <h2>Não foi possível carregar suas atividades.</h2>
+          <button id="btn-tentar-novamente" class="button button--secondary" type="button">Tentar novamente</button>
+        </section>
+      </section>
+
+      <template id="template-atividade">
+        <li class="activity-card atividade" data-id="" data-status="pendente" data-tipo="prova">
+          <div class="activity-main">
+            <h3 data-campo="titulo"></h3>
+            <p data-campo="disciplina"></p>
+          </div>
+          <div class="activity-meta">
+            <div class="meta-cell"><span class="meta-label">Tipo</span><span class="badge badge--neutral badge-tipo" data-campo="tipo"></span></div>
+            <div class="meta-cell"><span class="meta-label">Prazo</span><time data-campo="data_prazo" datetime=""></time></div>
+            <div class="meta-cell"><span class="meta-label">Status</span><span class="badge badge-status" data-campo="status"></span></div>
+          </div>
+          <div class="activity-actions" aria-label="Ações da atividade">
+            <button class="icon-button" type="button" data-action="concluir" aria-label="Concluir atividade">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12 4 4L19 6"/></svg>
+            </button>
+            <button class="icon-button" type="button" data-action="editar" aria-label="Editar atividade">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 5 4 4M4 20l4.5-1 10.8-10.8a2.1 2.1 0 0 0-3-3L5.5 16 4 20Z"/></svg>
+            </button>
+            <button class="icon-button icon-button--danger" type="button" data-action="excluir" aria-label="Excluir atividade">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"/></svg>
+            </button>
+          </div>
+        </li>
+      </template>
+    </main>
+  </div>
+
+  <dialog id="dialog-atividade" class="dialog" aria-labelledby="dialog-titulo">
+    <h2 id="dialog-titulo">Nova atividade</h2>
+    <form id="form-atividade" class="dialog-form" action="#" method="post">
+      <input id="atividade-id" type="hidden" name="atividade_id" value="">
+      <div id="erro-atividade" class="form-error" role="alert" hidden></div>
+      <div id="aviso-sem-disciplinas" class="dialog-warning" hidden>
+        Você precisa cadastrar uma disciplina antes de criar uma atividade.
+        <a href="disciplinas.html">Cadastrar disciplina</a>
+      </div>
+      <div class="field">
+        <label for="atividade-titulo">Título</label>
+        <input id="atividade-titulo" name="titulo" type="text" maxlength="150" required>
+      </div>
+      <div class="field">
+        <label for="atividade-disciplina">Disciplina</label>
+        <select id="atividade-disciplina" name="id_disciplina" required>
+          <option value="">Selecione uma disciplina</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="atividade-tipo">Tipo</label>
+        <select id="atividade-tipo" name="tipo" required>
+          <option value="prova">Prova</option>
+          <option value="trabalho">Trabalho</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="atividade-data">Data do prazo</label>
+        <input id="atividade-data" name="data_prazo" type="date" required>
+      </div>
+      <div class="field">
+        <label for="atividade-descricao">Descrição <span class="muted">(opcional)</span></label>
+        <textarea id="atividade-descricao" name="descricao" rows="3"></textarea>
+      </div>
+      <div class="dialog-actions">
+        <button id="btn-cancelar-atividade" class="button button--secondary" type="button">Cancelar</button>
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-excluir" class="dialog" aria-labelledby="dialog-excluir-titulo">
+    <h2 id="dialog-excluir-titulo">Excluir atividade?</h2>
+    <p>Tem certeza de que deseja excluir esta atividade?</p>
+    <p id="excluir-titulo" class="dialog-warning"></p>
+    <p class="muted">Essa ação não pode ser desfeita.</p>
+    <div class="dialog-actions">
+      <button id="btn-cancelar-excluir" class="button button--secondary" type="button">Cancelar</button>
+      <button id="btn-confirmar-excluir" class="button--danger" type="button">Excluir</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>Ative o JavaScript para usar a agenda.</noscript>
+</body>
+</html>

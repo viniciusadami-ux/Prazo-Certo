@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Disciplinas — Prazo Certo</title>
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Barra lateral">
+      <div class="sidebar-topline">
+        <a class="brand brand--light" href="../index.html" aria-label="Prazo Certo — início">
+          <img src="../img/logo-branco.svg" width="38" height="38" alt="">
+          <span>Prazo Certo</span>
+        </a>
+        <div class="sidebar-user">
+          <strong>Minha conta</strong>
+          <span>Área do estudante</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navegação do sistema">
+        <a href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18M8 13h3M8 17h7"/></svg>
+          Atividades
+        </a>
+        <a href="disciplinas.html" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 5.5V21M8 7h8M8 11h7"/></svg>
+          Disciplinas
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button id="btn-sair" type="button" class="button button--outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg>
+          Sair
+        </button>
+      </div>
+    </aside>
+
+    <main id="conteudo-principal" class="app-content" aria-label="Conteúdo principal">
+      <header class="page-heading">
+        <div>
+          <h1>Disciplinas</h1>
+          <p>Cadastre as matérias para organizar suas atividades.</p>
+        </div>
+      </header>
+
+      <section class="panel discipline-form-panel" aria-label="Cadastrar disciplina">
+        <h2>Adicionar disciplina</h2>
+        <p>Informe o nome da matéria e, se desejar, o nome do professor.</p>
+        <form id="form-disciplina" class="discipline-form" action="#" method="post">
+          <div class="field">
+            <label for="disciplina-nome">Nome da disciplina</label>
+            <input id="disciplina-nome" name="nome" type="text" maxlength="100" required>
+          </div>
+          <div class="field">
+            <label for="disciplina-professor">Professor <span class="muted">(opcional)</span></label>
+            <input id="disciplina-professor" name="professor" type="text" maxlength="100">
+          </div>
+          <button type="submit">Adicionar disciplina</button>
+        </form>
+        <div id="erro-disciplina" class="form-error" role="alert" tabindex="-1" hidden></div>
+      </section>
+
+      <section class="panel" aria-label="Disciplinas cadastradas">
+        <h2>Minhas disciplinas</h2>
+        <ul id="lista-disciplinas" class="discipline-list" aria-label="Lista de disciplinas"></ul>
+
+        <section id="estado-carregando-disciplinas" class="skeleton-list" aria-label="Carregando disciplinas">
+          <p class="sr-only" role="status">Carregando disciplinas…</p>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+          <div class="skeleton-card" aria-hidden="true"><span class="skeleton-line skeleton-line--medium"></span><span class="skeleton-line skeleton-line--short"></span></div>
+        </section>
+
+        <section id="estado-vazio-disciplinas" class="state-box" hidden>
+          <h3>Nenhuma disciplina cadastrada.</h3>
+          <p>Use o formulário acima para cadastrar a primeira.</p>
+        </section>
+
+        <section id="estado-erro-disciplinas" class="state-box state-box--error" role="alert" hidden>
+          <h3>Não foi possível carregar suas disciplinas.</h3>
+          <button id="btn-tentar-novamente-disciplinas" class="button button--secondary" type="button">Tentar novamente</button>
+        </section>
+      </section>
+
+      <template id="template-disciplina">
+        <li class="discipline-card disciplina" data-id="">
+          <div class="discipline-main">
+            <h3 data-campo="nome"></h3>
+            <p data-campo="professor"></p>
+          </div>
+          <button class="icon-button icon-button--danger" type="button" data-action="excluir-disciplina" aria-label="Excluir disciplina">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m4 4v6m6-6v6"/></svg>
+          </button>
+        </li>
+      </template>
+    </main>
+  </div>
+
+  <dialog id="dialog-excluir-disciplina" class="dialog" aria-labelledby="dialog-excluir-disciplina-titulo">
+    <h2 id="dialog-excluir-disciplina-titulo">Excluir disciplina?</h2>
+    <p>Tem certeza de que deseja excluir esta disciplina?</p>
+    <p id="excluir-disciplina-nome" class="dialog-warning"></p>
+    <p class="muted">As atividades dessa disciplina também serão excluídas.</p>
+    <div class="dialog-actions">
+      <button id="btn-cancelar-excluir-disciplina" class="button button--secondary" type="button">Cancelar</button>
+      <button id="btn-confirmar-excluir-disciplina" class="button--danger" type="button">Excluir</button>
+    </div>
+  </dialog>
+
+  <noscript>Ative o JavaScript para usar a agenda.</noscript>
+</body>
+</html>
