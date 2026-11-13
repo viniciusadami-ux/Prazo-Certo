@@ -218,7 +218,7 @@ img/onda.svg	uma onda, viewBox="0 0 1440 120"	preserveAspectRatio="none", alt=""
 img/vazio.svg	calendário pequeno para o estado vazio	opcional
 fonts/*.woff2	400, 600, 700, 800	só se houver fonte própria; nada de CDN
 Tudo vetorial, otimizado, sem PNG/JPG, sem screenshot do mockup. A mini-agenda do hero é HTML, não imagem.
-12. O que o parceiro não pode fazer
+12. O que não pode fazer
 - Não incluir <script>, onclick, fetch, localStorage ou URL de API.
 - Não deixar atividades ou usuário mockados no HTML final. Use <template> e estados ocultos; para revisar o visual, remova hidden/use open temporariamente e devolva o estado final.
 - Não colocar id dentro de <template>.
@@ -243,23 +243,3 @@ Tudo vetorial, otimizado, sem PNG/JPG, sem screenshot do mockup. A mini-agenda d
 - Contraste AA conferido; status com texto, não só cor.
 - Nenhum JS, nenhum dado mockado, nenhum link para backend.
 - README curto do parceiro: arquivos, fonte, tokens alterados, pendências.
-14. O que você faz depois da entrega estática
-Nesta ordem, sem pular:
-1. Revisão: abra as páginas, confira a seção 13 item por item e peça ao parceiro um walkthrough de 20 minutos. Você vai defender esse HTML também; não aceite código que não entende.
-2. js/api.js: um objeto API com get, post, put, patch, delete; fetch com credentials: "same-origin", Content-Type: application/json, tratamento de 204, erro com status e mensagem. Sem módulos ES; scripts com defer na ordem.
-3. js/auth.js: submit de login/cadastro, validação local, redirecionamento para dashboard.html; no dashboard, GET /api/me para preencher #usuario-nome/#usuario-email e #btn-sair para POST /api/logout.
-4. js/atividades.js: carregar disciplinas e atividades, preencher o select, renderizar o template, filtros por change, abrir/fechar diálogo, criar/editar, concluir, excluir, estados e toast. Use delegação de evento em #lista-atividades (closest("[data-action]")) em vez de um listener por botão.
-5. js/disciplinas.js: listar, criar, excluir, estados.
-6. Backend: repetir no app.py todas as validações que o HTML faz. required e minlength são UX, não segurança.
-Você precisa saber explicar, no mínimo:
-- Por que caminhos relativos e como o Flask serve o frontend sem expor backend/.
-- Por que a lista é <ul> e não <table>.
-- O que <template> faz e por que não há id dentro dele.
-- Como funciona a delegação de evento na lista.
-- Por que o HTML do parceiro não tem JS (separação de responsabilidades).
-- Por que esconder a página do dashboard não é autenticação; onde está a checagem real.
-- A diferença entre validação HTML e validação no backend.
-- Por que <dialog> em vez de uma div modal.
-15. Prazo e corte
-Hoje é 12/11. O parceiro precisa entregar o estático até 13/11, 18h; você liga o JS em 13–14/11 e fecha a integração em 15/11. O app.py corre em paralelo e não depende do frontend.
-Se o parceiro atrasar: você escreve uma versão mínima de login e dashboard (precisa entender cada linha), corta a ilustração do hero e o polimento da página de disciplinas. Não corte o dashboard, o login, a revisão nem a defesa. Se ele só entregar Figma, este documento vira o seu roteiro de implementação.

@@ -1,131 +1,399 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Organize provas, trabalhos e prazos escolares em uma agenda simples.">
-  <title>Prazo Certo — sua agenda escolar</title>
+  <meta name="theme-color" content="#102A43">
+  <meta name="description" content="Agenda de provas e trabalhos para o bimestre. Cadastre disciplinas, anote prazos e marque o que já entregou. Projeto Integrador do Técnico em Informática da UNASP.">
+  <title>Prazo Certo: provas e trabalhos do bimestre em uma lista</title>
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="img/fonts/nunito-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="img/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/estilo.css">
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
 </head>
-<body>
-  <header class="site-header" aria-label="Cabeçalho principal">
+<body id="topo">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header" data-header>
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="Prazo Certo — início">
+      <a class="brand" href="index.html" aria-label="Prazo Certo, página inicial">
         <img src="img/logo.svg" width="38" height="38" alt="">
         <span>Prazo Certo</span>
       </a>
+
       <nav class="header-nav" aria-label="Navegação principal">
-        <a class="features-link" href="#funcionalidades">Funcionalidades</a>
-        <a class="button" href="pages/login.html">Entrar</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#perguntas">Perguntas</a>
       </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="pages/login.html">Entrar</a>
+        <a class="button header-cta" href="pages/cadastro.html">Criar conta</a>
+      </div>
     </div>
   </header>
-  <img class="hero-wave hero-wave--top" src="img/onda.svg" width="1440" height="120" alt="">
 
-  <main aria-label="Conteúdo principal">
-    <section class="hero" aria-label="Apresentação do Prazo Certo">
+  <main id="conteudo">
+    <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Sua rotina escolar mais leve</p>
-          <h1>Todas as provas e trabalhos em uma lista só.</h1>
-          <p>Cadastre disciplinas, anote prazos e marque o que já entregou. Sem planilha, sem post-it perdido.</p>
+          <h1 id="hero-title">Prova na quarta, trabalho na sexta. <span class="hero-mark">Tudo numa lista.</span></h1>
+          <p class="hero-lead">O Prazo Certo guarda as datas do bimestre por disciplina e mostra o que ainda está pendente. Você cadastra uma vez e consulta pelo navegador, sem caçar print de grupo ou folha solta.</p>
+
           <div class="hero-actions">
-            <a class="button" href="pages/cadastro.html">Criar conta</a>
-            <a class="button button--secondary" href="pages/login.html">Entrar</a>
+            <a class="button button--lg" href="pages/cadastro.html">
+              Criar conta
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="button button--lg button--secondary" href="pages/login.html">Entrar</a>
           </div>
+
+          <p class="hero-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>
+            Nome, e-mail e senha. Sem instalação.
+          </p>
         </div>
 
         <div class="hero-visual">
-          <img class="hero-art" src="img/hero-calendario.svg" width="480" height="360" alt="">
-          <div class="hero-preview" aria-label="Exemplo de agenda">
-          <div class="preview-top">
-            <strong>Exemplo de agenda</strong>
-            <span class="preview-date">Novembro</span>
-          </div>
-          <ul class="preview-list">
-            <li class="preview-item">
+          <div class="hero-halo" aria-hidden="true"></div>
+
+          <article class="agenda-card" aria-label="Exemplo de agenda com três atividades">
+            <header class="agenda-head">
               <div>
-                <strong>Prova de Matemática</strong>
-                <time datetime="2026-11-18">18/11</time>
+                <p class="agenda-date">Quinta, 12 de novembro</p>
+                <h2 class="agenda-title">Minhas atividades</h2>
               </div>
-              <span class="badge badge--pending">Pendente</span>
-            </li>
-            <li class="preview-item">
-              <div>
-                <strong>Trabalho de História</strong>
-                <time datetime="2026-11-21">21/11</time>
-              </div>
-              <span class="badge badge--pending">Pendente</span>
-            </li>
-            <li class="preview-item">
-              <div>
-                <strong>Prova de Português</strong>
-                <time datetime="2026-11-25">25/11</time>
-              </div>
-              <span class="badge badge--done">Concluída</span>
-            </li>
-          </ul>
-          </div>
+              <span class="agenda-count"><strong data-agenda-count>3</strong> pendentes</span>
+            </header>
+
+            <div class="agenda-filters" aria-hidden="true">
+              <span class="agenda-filter is-active">Todas</span>
+              <span class="agenda-filter">Provas</span>
+              <span class="agenda-filter">Trabalhos</span>
+            </div>
+
+            <ul class="agenda-list">
+              <li class="agenda-item">
+                <span class="agenda-mark" aria-hidden="true">
+                  <svg viewBox="0 0 20 20"><path d="m4.5 10.5 3.5 3.5 7-8"/></svg>
+                </span>
+                <div class="agenda-body">
+                  <strong class="agenda-item-title">Prova de Matemática</strong>
+                  <span class="agenda-meta">Matemática · Prova</span>
+                </div>
+                <div class="agenda-side">
+                  <time datetime="2026-11-18">18/11</time>
+                  <span class="agenda-badge agenda-badge--pending">Pendente</span>
+                  <span class="agenda-when">em 6 dias</span>
+                </div>
+              </li>
+
+              <li class="agenda-item">
+                <span class="agenda-mark" aria-hidden="true">
+                  <svg viewBox="0 0 20 20"><path d="m4.5 10.5 3.5 3.5 7-8"/></svg>
+                </span>
+                <div class="agenda-body">
+                  <strong class="agenda-item-title">Trabalho de História</strong>
+                  <span class="agenda-meta">História · Trabalho</span>
+                </div>
+                <div class="agenda-side">
+                  <time datetime="2026-11-21">21/11</time>
+                  <span class="agenda-badge agenda-badge--pending">Pendente</span>
+                </div>
+              </li>
+
+              <li class="agenda-item" data-agenda-demo>
+                <span class="agenda-mark" aria-hidden="true">
+                  <svg viewBox="0 0 20 20"><path d="m4.5 10.5 3.5 3.5 7-8"/></svg>
+                </span>
+                <div class="agenda-body">
+                  <strong class="agenda-item-title">Prova de Português</strong>
+                  <span class="agenda-meta">Português · Prova</span>
+                </div>
+                <div class="agenda-side">
+                  <time datetime="2026-11-25">25/11</time>
+                  <span class="agenda-badge agenda-badge--pending" data-agenda-badge>Pendente</span>
+                </div>
+              </li>
+            </ul>
+
+            <footer class="agenda-foot">
+              <span class="agenda-live" aria-hidden="true"></span>
+              <span>Exemplo de agenda</span>
+            </footer>
+          </article>
         </div>
       </div>
+
       <img class="hero-wave" src="img/onda.svg" width="1440" height="120" alt="">
     </section>
 
-    <section class="features" id="funcionalidades" aria-label="Funcionalidades do Prazo Certo">
+    <section class="steps" id="como-funciona" aria-labelledby="steps-title">
       <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Tudo no seu lugar</p>
-          <h2>Organização sem complicação</h2>
-          <p>Encontre suas atividades e acompanhe cada prazo em poucos passos.</p>
+        <div class="section-head">
+          <h2 id="steps-title">Três passos até a primeira atividade.</h2>
+          <p>Não tem configuração inicial nem tela escondida. O caminho é o mesmo para qualquer conta.</p>
         </div>
 
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">
-              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 5.5V21M8 7h8M8 11h7"/></svg>
-            </div>
-            <h3>Disciplinas no lugar</h3>
-            <p>Matemática, História, Português: cada trabalho fica na disciplina certa.</p>
-            <div class="feature-example" aria-label="Exemplos de disciplinas">
-              <span class="chip">Matemática</span><span class="chip">História</span><span class="chip">Português</span>
+        <ol class="step-list">
+          <li class="step">
+            <span class="step-number" aria-hidden="true">01</span>
+            <h3>Crie a conta</h3>
+            <p>Nome, e-mail e senha. O cadastro cria um usuário no banco e mantém tudo o que você anotar ligado a ele.</p>
+          </li>
+          <li class="step">
+            <span class="step-number" aria-hidden="true">02</span>
+            <h3>Cadastre a disciplina</h3>
+            <p>Matemática, História, Física. O nome do professor é opcional e ajuda a lembrar de quem cobrou o trabalho.</p>
+          </li>
+          <li class="step">
+            <span class="step-number" aria-hidden="true">03</span>
+            <h3>Anote a atividade</h3>
+            <p>Título, tipo, data e uma descrição se precisar. A lista mostra a disciplina e o prazo, e você marca como concluída quando entregar.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="features" id="funcionalidades" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <h2 id="features-title">O que a tela resolve</h2>
+          <p>Quatro partes da rotina que costumam virar post-it, print e mensagem perdida no grupo.</p>
+        </div>
+
+        <div class="bento">
+          <article class="bento-card bento-card--list">
+            <h3>A lista não esconde o prazo</h3>
+            <p>Cada atividade aparece com a disciplina, o tipo e o dia. A mais próxima fica com a data à vista.</p>
+            <div class="mini-list" aria-hidden="true">
+              <div class="mini-row mini-row--next">
+                <div><strong>Prova de Matemática</strong><span>Matemática · Prova</span></div>
+                <time datetime="2026-11-18">18/11</time>
+              </div>
+              <div class="mini-row">
+                <div><strong>Trabalho de História</strong><span>História · Trabalho</span></div>
+                <time datetime="2026-11-21">21/11</time>
+              </div>
+              <div class="mini-row">
+                <div><strong>Prova de Português</strong><span>Português · Prova</span></div>
+                <time datetime="2026-11-25">25/11</time>
+              </div>
             </div>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">
-              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="m8 15 2 2 5-5"/></svg>
+          <article class="bento-card bento-card--filters">
+            <h3>Filtros que se combinam</h3>
+            <p>Escolha disciplina, tipo e status. Os três filtros valem ao mesmo tempo.</p>
+            <div class="mini-filters" aria-hidden="true">
+              <span>Matemática</span>
+              <span>Prova</span>
+              <span>Pendente</span>
             </div>
-            <h3>Prazo na frente</h3>
-            <p>A data da prova aparece antes de virar correria.</p>
-            <div class="feature-example"><span class="chip">18/11</span><span class="muted">Próximo prazo</span></div>
+            <p class="mini-result" aria-hidden="true">1 atividade encontrada</p>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">
-              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h16"/><circle cx="9" cy="5" r="2.2" fill="#fff"/><circle cx="15" cy="12" r="2.2" fill="#fff"/><circle cx="7" cy="19" r="2.2" fill="#fff"/></svg>
+          <article class="bento-card bento-card--status">
+            <h3>Concluir sem perder o histórico</h3>
+            <p>Marcou como entregue, o título ganha o risco e o item sai das pendências. Ele continua na lista, caso você precise conferir depois.</p>
+            <div class="mini-status" aria-hidden="true">
+              <span class="mini-status-title">Prova de Português</span>
+              <span class="agenda-badge agenda-badge--done">Concluída</span>
             </div>
-            <h3>Filtro rápido</h3>
-            <p>Veja só as provas pendentes ou só o que é de uma disciplina.</p>
-            <div class="feature-example"><span class="chip">Pendente</span><span class="chip">Matemática</span></div>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">
-              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+          <article class="bento-card bento-card--account">
+            <h3>Cada conta vê o que é dela</h3>
+            <p>As consultas são filtradas pelo usuário logado. Quem entra com outro e-mail não encontra suas disciplinas nem suas atividades.</p>
+            <div class="mini-account" aria-hidden="true">
+              <span class="mini-avatar">VC</span>
+              <span class="mini-account-text"><strong>Você</strong><small>seu@email.com</small></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
             </div>
-            <h3>Status claro</h3>
-            <p>Marcou como concluída, saiu da lista de pendências.</p>
-            <div class="feature-example"><span class="badge badge--done">Concluída</span></div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project" id="projeto" aria-labelledby="project-title">
+      <div class="container project-grid">
+        <div class="project-copy">
+          <h2 id="project-title">O projeto por trás da agenda</h2>
+          <p>O Prazo Certo é o Projeto Integrador do 2º ano do Técnico em Informática da UNASP, nas disciplinas de Desenvolvimento Web, Programação Orientada a Objetos e Banco de Dados.</p>
+          <p>A versão entregue em novembro de 2026 cobre o essencial: conta, disciplinas, atividades, filtros e conclusão. Notificação, calendário externo e aplicativo ficaram fora do escopo para caber no prazo do bimestre.</p>
+          <p>A ideia veio de uma cena comum: quatro provas na mesma semana, cada uma anotada em um lugar diferente.</p>
+        </div>
+
+        <aside class="project-card" aria-labelledby="ficha-title">
+          <h3 id="ficha-title">Ficha do projeto</h3>
+          <dl>
+            <div><dt>Curso</dt><dd>Técnico em Informática, 2º ano</dd></div>
+            <div><dt>Disciplinas</dt><dd>DWS, POO e Banco de Dados</dd></div>
+            <div><dt>Entrega</dt><dd>Novembro de 2026</dd></div>
+            <div><dt>Stack</dt><dd>Flask, SQLite, HTML, CSS e JavaScript</dd></div>
+          </dl>
+
+          <div class="project-scope">
+            <h4>Na versão entregue</h4>
+            <ul>
+              <li>Cadastro e login com senha em hash</li>
+              <li>Disciplinas vinculadas ao usuário</li>
+              <li>Atividades com tipo, data e descrição</li>
+              <li>Filtros por disciplina, tipo e status</li>
+              <li>Concluir e excluir atividades</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <div class="container">
+        <div class="arch">
+          <div class="arch-head">
+            <h3>O caminho de um dado</h3>
+            <p>O navegador nunca fala com o SQLite. Ele chama a API, e o Flask decide o que cada usuário pode ver.</p>
+          </div>
+
+          <ol class="arch-flow">
+            <li class="arch-node"><strong>Navegador</strong><span>HTML, CSS e JS</span></li>
+            <li class="arch-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+            <li class="arch-node"><strong>Flask</strong><span>rotas /api</span></li>
+            <li class="arch-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+            <li class="arch-node"><strong>DAO</strong><span>SQL parametrizado</span></li>
+            <li class="arch-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+            <li class="arch-node"><strong>SQLite</strong><span>arquivo local</span></li>
+          </ol>
+
+          <p class="arch-note">O frontend usa <code>fetch</code> e recebe JSON. O DAO executa SQL parametrizado, e o Flask filtra os dados pelo usuário logado.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="perguntas" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="faq-intro">
+          <h2 id="faq-title">Perguntas sobre o sistema</h2>
+          <p>Respostas sobre uso, dados e escopo.</p>
+        </div>
+
+        <div class="faq-list">
+          <details name="perguntas" open>
+            <summary>
+              <span class="faq-question">Preciso instalar alguma coisa?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>Não. O sistema roda no navegador. No computador, você abre o endereço do projeto; no celular, o layout se ajusta a partir de 360 px.</p>
+          </details>
+
+          <details name="perguntas">
+            <summary>
+              <span class="faq-question">Outra pessoa vê minhas atividades?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>Não. Cada conta acessa apenas as disciplinas e atividades cadastradas nela. As consultas são filtradas pelo usuário que está logado.</p>
+          </details>
+
+          <details name="perguntas">
+            <summary>
+              <span class="faq-question">O sistema avisa quando o prazo está chegando?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>Ainda não. A data aparece na lista, mas não há e-mail, notificação ou alarme. Você precisa abrir a agenda para conferir.</p>
+          </details>
+
+          <details name="perguntas">
+            <summary>
+              <span class="faq-question">Posso excluir uma disciplina com atividades dentro?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>Pode. As atividades ligadas a ela são apagadas junto, por causa da exclusão em cascata configurada no banco. Se quiser guardar o histórico, marque a atividade como concluída em vez de excluir.</p>
+          </details>
+
+          <details name="perguntas">
+            <summary>
+              <span class="faq-question">Como a data é guardada?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>No formato AAAA-MM-DD, como texto. O SQLite não tem um tipo de data próprio, e esse formato ordena corretamente sem depender do idioma do navegador.</p>
+          </details>
+
+          <details name="perguntas">
+            <summary>
+              <span class="faq-question">Dá para usar no celular e no computador?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p>Sim. A conta é a mesma nos dois. O layout foi testado em 360, 768 e 1200 px, e a navegação por pill continua no topo.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container cta-grid">
+        <div class="cta-copy">
+          <h2 id="cta-title">A próxima prova já tem data.</h2>
+          <p>Crie a conta, cadastre a disciplina e a atividade. A lista fica pronta para consulta quando o bimestre apertar.</p>
+          <div class="hero-actions cta-actions">
+            <a class="button button--lg button--light" href="pages/cadastro.html">
+              Criar conta
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="button button--lg button--ghost-light" href="pages/login.html">Já tenho conta</a>
+          </div>
+          <p class="cta-note">Nome, e-mail e senha. Sem instalação.</p>
+        </div>
+
+        <div class="cta-art" aria-hidden="true">
+          <img src="img/hero-calendario.svg" width="480" height="360" alt="" loading="lazy">
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer" aria-label="Rodapé">
-    <img class="footer-wave" src="img/onda.svg" width="1440" height="120" alt="">
-    <div class="container"><p>Prazo Certo · Projeto Integrador · UNASP 2026</p></div>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand brand--light" href="index.html" aria-label="Prazo Certo, página inicial">
+          <img src="img/logo-branco.svg" width="36" height="36" alt="">
+          <span>Prazo Certo</span>
+        </a>
+        <p>Agenda de provas e trabalhos para o bimestre. Projeto Integrador do Técnico em Informática da UNASP.</p>
+        <p class="footer-status"><span class="footer-status-dot" aria-hidden="true"></span>Em desenvolvimento para a entrega de novembro</p>
+      </div>
+
+      <nav class="footer-col" aria-labelledby="footer-nav">
+        <h3 id="footer-nav">Navegar</h3>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#projeto">Sobre o projeto</a>
+        <a href="#perguntas">Perguntas</a>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-conta">
+        <h3 id="footer-conta">Conta</h3>
+        <a href="pages/cadastro.html">Criar conta</a>
+        <a href="pages/login.html">Entrar</a>
+      </nav>
+
+      <div class="footer-col footer-col--project">
+        <h3>Projeto</h3>
+        <p>DWS · POO · Banco de Dados</p>
+        <p>Entrega em novembro de 2026</p>
+        <p>Flask, SQLite, HTML, CSS e JavaScript</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Prazo Certo</p>
+      <p>Projeto Integrador · UNASP</p>
+      <a href="#topo">
+        Voltar ao topo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+      </a>
+    </div>
   </footer>
+
+  <script src="js/inicio.js" defer></script>
 </body>
 </html>
